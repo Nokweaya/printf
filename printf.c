@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "main.h"
 /**
- * _printf - Custom printf function.
+ * _printf - Custom printf function using _putchar.
  * @format: Format specifier string.
  * Return: Number of characters printed.
  */
@@ -19,30 +19,35 @@ int _printf(const char *format, ...)
 	{
 		if (*ptr == '%')
 		{
-			switch (*(ptr + 1))
-			{
-			case 'c':
-			count += _putchar("%c", va_arg(args, int));
+		switch (*(ptr + 1))
+		{
+		case 'c':
+		count += _putchar(va_arg(args, int));
+		break;
+		case 's':
+
+		char *str = va_arg(args, char *);
+
+		while (*str != '\0')
+		{
+			count += _putchar(*str);
+			str++;
+		}
 			break;
-			case 's':
-			count += _putchar("%s", va_arg(args, char *));
+		case '%':
+			count += _putchar('%');
 			break;
-			case '%':
-			count += _putchar("%%");
+		default:
 			break;
-			default:
-			break;
-			}
-			ptr += 2;
+		}
+		ptr += 2;
 		}
 		else
 		{
-			_putchar(*ptr);
-			count++;
+			count += _putchar(*ptr);
 			ptr++;
 		}
 	}
-
 	va_end(args);
 	return (count);
 }
