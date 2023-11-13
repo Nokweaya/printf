@@ -25,6 +25,7 @@ int _printf(const char *format, ...)
 		count += _putchar(va_arg(args, int));
 		break;
 		case 's':
+		{
 
 		char *str = va_arg(args, char *);
 
@@ -41,6 +42,7 @@ int _printf(const char *format, ...)
 			break;
 		}
 		ptr += 2;
+		}
 		}
 		else
 		{
