@@ -7,7 +7,6 @@
  */
 int _printf(const char *format, ...)
 {
-{
 int count = 0;
 va_list args;
 const char *ptr = format;
@@ -18,7 +17,9 @@ if (*ptr == '%')
 {
 switch (*(ptr + 1))
 {
-case 'c': count += _putchar(va_arg(args, int)); break;
+case 'c':
+count += _putchar(va_arg(args, int));
+break;
 case 's':
 {
 char *str = va_arg(args, char *);
@@ -29,8 +30,11 @@ str++;
 }
 break;
 }
-case '%': count += _putchar('%'); break;
-default: break;
+case '%':
+count += _putchar('%');
+break;
+default:
+break;
 }
 ptr += 2;
 }
