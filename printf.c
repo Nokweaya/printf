@@ -1,49 +1,53 @@
-#include <stdio.h>
 #include <stdarg.h>
+#include <stdio.h>
 #include "main.h"
 /**
- * _printf - Custom printf function with limited functionality.
- *
- * This function mimics the behavior of printf for the format specifiers:
- * - %c: Character
- * - %s: String
- * - %%: Percent sign
- *
- * It does not handle flag characters, field width, precision,length modifiers.
- *
- * @format: The format string containing the format specifiers.
- *
- * Return: The number of characters printed (excluding the null byte).
+ * _printf - Custom printf function using _putchar.
+ * @format: Format specifier string.
+ * Return: Number of characters printed.
  */
 int _printf(const char *format, ...)
 {
-int count = 0;
-va_list args;
-va_start(args, format);
-while (*format)
-{
-if (*format == '%')
-{
-format++;
-switch (*format)
-{
-case 'c':
-count += putchar(va_arg(args, int));
-break;
-case 's':
-count += printf("%s", va_arg(args, char *));
-break;
-case '%':
-count += putchar('%');
-break;
-}
-}
-else
-{
-count += putchar(*format);
-}
-format++;
-}
-va_end(args);
-return (count);
+	va_list args;
+
+	va_start(args, format);
+
+	int count = 0;
+	const char *ptr = format;
+
+	while (*ptr != '\0')
+	{
+		if (*ptr == '%')
+		{
+		switch (*(ptr + 1))
+		{
+		case 'c':
+		count += _putchar(va_arg(args, int));
+		break;
+		case 's':
+
+		char *str = va_arg(args, char *);
+
+		while (*str != '\0')
+		{
+			count += _putchar(*str);
+			str++;
+		}
+			break;
+		case '%':
+			count += _putchar('%');
+			break;
+		default:
+			break;
+		}
+		ptr += 2;
+		}
+		else
+		{
+			count += _putchar(*ptr);
+			ptr++;
+		}
+	}
+	va_end(args);
+	return (count);
 }
