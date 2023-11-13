@@ -19,35 +19,26 @@ int _printf(const char *format, ...)
 	{
 		if (*ptr == '%')
 		{
-		switch (*(ptr + 1))
-		{
-		case 'c':
-		count += _putchar(va_arg(args, int));
-		break;
-		case 's':
-		{
+			char *str;
 
-		char *str = va_arg(args, char *);
-
-		while (*str != '\0')
-		{
-			count += _putchar(*str);
-			str++;
-		}
-			break;
-		case '%':
-			count += _putchar('%');
-			break;
-		default:
-			break;
-		}
-		ptr += 2;
-		}
+			switch (*(ptr + 1))
+			{
+				case 'c':
+				count += _putchar(va_arg(args, int));
+				break;
+				case 's':
+				str = va_arg(args, char *);
+				while (*str)
+				{
+				count += _putchar(*str++);
+				}
+				break;
+			}
+			ptr += 2;
 		}
 		else
 		{
-			count += _putchar(*ptr);
-			ptr++;
+			count += _putchar(*ptr++);
 		}
 	}
 	va_end(args);
