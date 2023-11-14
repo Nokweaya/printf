@@ -35,5 +35,5 @@ int print_exc_string(va_list val)
 			len++;
 		}
 	}
-	return(len);
+	return (len);
 }

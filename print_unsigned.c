@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * printf_unsigned - print integer
+ * print_unsigned - print unsigned integer
  * @args: argument to print
  * Return: number of character printed
  */
@@ -25,7 +25,7 @@ int print_unsigned(va_list args)
 	{
 		while (num / 10 != 0)
 		{
-			exp= exp * 10;
+			exp = exp * 10;
 			num = num / 10;
 		}
 		while (exp > 0)

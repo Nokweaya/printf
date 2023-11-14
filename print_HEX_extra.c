@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * print_HEX_extra - print to hex
- * @val: value to be converted
+ * @num: value to be converted
  * Return: count
  */
 int print_HEX_extra(unsigned int num)

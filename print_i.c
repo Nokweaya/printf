@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * printf_int - prints integer
+ * print_int - prints integer
  * @args: argument to print
  * Return: number of characters printed
  */
@@ -25,7 +25,7 @@ int print_int(va_list args)
 	{
 		while (num / 10 != 0)
 		{
-			exp= exp * 10;
+			exp = exp * 10;
 			num = num / 10;
 		}
 		while (exp > 0)
@@ -43,7 +43,7 @@ int print_int(va_list args)
 }
 #include "main.h"
 /**
- * printf_dec - print decimal
+ * print_dec - print decimal
  * @args: argument to print
  * Return: number of characters printed
  */
@@ -52,7 +52,7 @@ int print_dec(va_list args)
 	int n = va_arg(args, int);
 	int num, last = n % 10, digit, exp = 1;
 	int i = 1;
-	
+
 	n = n / 10;
 	num = n;
 
@@ -68,7 +68,7 @@ int print_dec(va_list args)
 	{
 		while (num / 10 != 0)
 		{
-			exp= exp * 10;
+			exp  = exp * 10;
 			num = num / 10;
 		}
 		while (exp > 0)

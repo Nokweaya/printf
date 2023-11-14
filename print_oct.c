@@ -1,8 +1,8 @@
 #include "main.h"
 /**
- * print_oct - print oct
- * @val: 
- * Return: 
+ * print_oct - convert to octal
+ * @val: variable parameter
+ * Return: count
  */
 int print_oct(va_list val)
 {
@@ -17,7 +17,7 @@ int print_oct(va_list val)
 		count++;
 	}
 	count++;
-	array =malloc(sizeof(int) *count);
+	array = malloc(sizeof(int) * count);
 
 	for (n = 0; n < count; n++)
 	{
