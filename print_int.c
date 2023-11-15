@@ -1,49 +1,49 @@
-#include <stdarg.h>
 #include "main.h"
+#include <stdio.h>
 /**
- * _printf - Custom printf function using _putchar.
- * @format: Format specifier string.
+ * _printf - Custom printf function with limited integer support.
+ * @format: Format string containing %d or %i specifier.
  * Return: Number of characters printed.
  */
 int _printf(const char *format, ...)
 {
 int count = 0;
 va_list args;
-const char *ptr = format;
 va_start(args, format);
-while (*ptr != '\0')
+while (*format)
 {
-if (*ptr == '%')
+if (*format == '%' && (*(format + 1) == 'd' || *(format + 1) == 'i'))
 {
-switch (*(ptr + 1))
-{
-case 'c':
-count += _putchar(va_arg(args, int));
-break;
-case 's':
-{
-char *str = va_arg(args, char *);
-while (*str != '\0')
-{
-count += _putchar(*str);
-str++;
-}
-break;
-}
-case '%':
-count += _putchar('%');
-break;
-default:
-break;
-}
-ptr += 2;
+int num = va_arg(args, int);
+count += printf("%d", num);
+format += 2;
 }
 else
 {
-count += _putchar(*ptr);
-ptr++;
+putchar(*format);
+count++;
+format++;
 }
 }
 va_end(args);
 return (count);
+}
+/**
+ * main - Entry point for testing _printf with different specifiers.
+ * Return: Always 0.
+ */
+int main(void)
+{
+int len;
+len = _printf("Character: %c\n", 'H');
+printf("Characters printed: %d\n\n", len);
+len = _printf("String: %s\n", "Hello, World!");
+printf("Characters printed: %d\n\n", len);
+len = _printf("Percent: %%\n");
+printf("Characters printed: %d\n\n", len);
+len = _printf("Multiple specifiers: %c, %s, and %%\n", 'A', "string");
+printf("Characters printed: %d\n\n", len);
+len = _printf("Unknown specifier: %r\n");
+printf("Characters printed: %d\n\n", len);
+return (0);
 }
