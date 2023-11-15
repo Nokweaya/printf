@@ -2,45 +2,43 @@
 #include <stdio.h>
 #include "main.h"
 /**
- * _printf - Custom printf function using _putchar.
- * @format: Format specifier string.
- * Return: Number of characters printed.
+ * _printf - mimics printf
+ * @format: indentifier to look for
+ * Return: integer
  */
 int _printf(const char *format, ...)
 {
+	match m[] = {
+		{"%c", printf_char}, {"%s", printf_string}, {"%%", print_percentage},
+		{"%d", print_dec}, {"%i", print_int}
+	};
+
 	va_list args;
+	int i = 0, len = 0;
+	int n;
 
 	va_start(args, format);
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
 
-	int count = 0;
-	const char *ptr = format;
-
-	while (*ptr != '\0')
+Here:
+	while (format[i] != '\0')
 	{
-		if (*ptr == '%')
+		n = 5;
+		while (n >= 0)
 		{
-			char *str;
-
-			switch (*(ptr + 1))
+			if (m[n].id[0] == format[i] && m[n].id[1] == format[i + 1])
 			{
-				case 'c':
-				count += _putchar(va_arg(args, int));
-				break;
-				case 's':
-				str = va_arg(args, char *);
-				while (*str)
-				{
-				count += _putchar(*str++);
-				}
-				break;
+				len = len + m[n].f(args);
+				i = i + 2;
+				goto Here;
 			}
-			ptr += 2;
+			n--;
 		}
-		else
-		{
-			count += _putchar(*ptr++);
-		}
+		_putchar(format[i]);
+		i++;
+		len++;
 	}
 	va_end(args);
-	return (count);
+	return (len);
 }
