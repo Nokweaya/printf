@@ -13,7 +13,6 @@ typedef struct format
 
 int _printf(const char *format, ...);
 int _putchar(char c);
-char *str = va_arg(args, char *);
 int printf_char(va_list val);
 int printf_string(va_list val);
 int _strlen(char *str);

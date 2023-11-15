@@ -1,49 +1,82 @@
 #include "main.h"
-#include <stdio.h>
 /**
- * _printf - Custom printf function with limited integer support.
- * @format: Format string containing %d or %i specifier.
- * Return: Number of characters printed.
+ * print_i - prints integer
+ * @args: argument to print
+ * Return: integer
  */
-int _printf(const char *format, ...)
+int print_i(va_list args)
 {
-int count = 0;
-va_list args;
-va_start(args, format);
-while (*format)
+int n = va_arg(args, int);
+int num, last = n % 10, digit, exp = 1;
+int  i = 1;
+n = n / 10;
+num = n;
+if (last < 0)
 {
-if (*format == '%' && (*(format + 1) == 'd' || *(format + 1) == 'i'))
-{
-int num = va_arg(args, int);
-count += printf("%d", num);
-format += 2;
+_putchar('-');
+num = -num;
+n = -n;
+last = -last;
+i++;
 }
-else
+if (num > 0)
 {
-putchar(*format);
-count++;
-format++;
+while (num / 10 != 0)
+{
+exp = exp * 10;
+num = num / 10;
+}
+num = n;
+while (exp > 0)
+{
+digit = num / exp;
+_putchar(digit + '0');
+num = num - (digit *exp);
+exp = exp / 10;
+i++;
 }
 }
-va_end(args);
-return (count);
+_putchar(last + '0');
+return (i);
 }
 /**
- * main - Entry point for testing _printf with different specifiers.
- * Return: Always 0.
+ * print_d - prints decimal
+ * @args: argument to print
+ * Return: integer
  */
-int main(void)
+int print_d(va_list args)
 {
-int len;
-len = _printf("Character: %c\n", 'H');
-printf("Characters printed: %d\n\n", len);
-len = _printf("String: %s\n", "Hello, World!");
-printf("Characters printed: %d\n\n", len);
-len = _printf("Percent: %%\n");
-printf("Characters printed: %d\n\n", len);
-len = _printf("Multiple specifiers: %c, %s, and %%\n", 'A', "string");
-printf("Characters printed: %d\n\n", len);
-len = _printf("Unknown specifier: %r\n");
-printf("Characters printed: %d\n\n", len);
-return (0);
+int n = va_arg(args, int);
+int num, last = n % 10, digit;
+int  i = 1;
+int exp = 1;
+n = n / 10;
+num = n;
+if (last < 0)
+{
+_putchar('-');
+num = -num;
+n = -n;
+last = -last;
+i++;
+}
+if (num > 0)
+{
+while (num / 10 != 0)
+{
+exp = exp * 10;
+num = num / 10;
+}
+num = n;
+while (exp > 0)
+{
+digit = num / exp;
+_putchar(digit + '0');
+num = num - (digit *exp);
+exp = exp / 10;
+i++;
+}
+}
+_putchar(last + '0');
+return (i);
 }
